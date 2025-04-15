@@ -1,6 +1,7 @@
-# Ruby-JMeter [![Build Status](https://travis-ci.org/flood-io/ruby-jmeter.png)](https://travis-ci.org/flood-io/ruby-jmeter) [![Code Climate](https://codeclimate.com/github/flood-io/ruby-jmeter.png)](https://codeclimate.com/github/flood-io/ruby-jmeter) [![Gem Version](https://badge.fury.io/rb/ruby-jmeter.svg)](http://badge.fury.io/rb/ruby-jmeter)
+# Ruby-JMeter
+>A release has not been made yet as compatability with current version of ruby have not been fixed
 
-> **JMeter-Ruby**  is a fork of the now defunk **Ruby-JMeter** that was built and maintained by [Flood IO](https://flood.io?utm_source=github), this gem intends to be continaution of ruby-jmeter
+> **JMeter-Ruby**  is a fork of the now defunk **Ruby-JMeter** that was built and maintained by Flood IO, this gem intends to be continaution of ruby-jmeter that is actievly maintained
 
 Tired of using the JMeter GUI or looking at hairy XML files?
 
@@ -345,7 +346,14 @@ end
 ```
 
 ## Roadmap
+
+1. [Get support for modern ruby versions](https://github.com/reeganviljoen/jmeter-ruby/issues/2)
+
+2. [Strip out any functionality tied to the now defunk Flood.io](https://github.com/reeganviljoen/jmeter-ruby/issues/3)
+
 This project is not being sposred by anyone curently but is being maintained. Get in touch with us if you'd like to be involved.
+
+
 
 ## Contributing
 
