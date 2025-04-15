@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: test ruby-${{ matrix.ruby_version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - ruby_version: "2.7.7"
+    steps:
+    - uses: actions/checkout@v4.1.1
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby_version }}
+        bundler-cache: true
+    - name: Build and test with Rake
+      run: |
+        bundle exec rspec
+      env:
+        RAISE_ON_WARNING: 1
+        RUBY_VERSION: ${{ matrix.ruby_version }}
+    # - name: Upload coverage results
+    #   uses: actions/upload-artifact@v4.4.0
+    #   if: always()
+    #   with:
+    #     name: simplecov-resultset-ruby-ruby${{matrix.ruby_version}}
+    #     path: coverage
+    #     include-hidden-files: true
+  # coverage:
+  #   needs: test
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v4.1.1
+  #   - name: Setup Ruby
+  #     uses: ruby/setup-ruby@v1
+  #     with:
+  #       ruby-version: 3.4
+  #       bundler-cache: true
+  #   - name: Download coverage results
+  #     uses: actions/download-artifact@v4.2.1
+  #   - name: Collate simplecov
+  #     run: |
+  #       bundle exec rake coverage:report
