@@ -1,22 +1,20 @@
 # Ruby-JMeter [![Build Status](https://travis-ci.org/flood-io/ruby-jmeter.png)](https://travis-ci.org/flood-io/ruby-jmeter) [![Code Climate](https://codeclimate.com/github/flood-io/ruby-jmeter.png)](https://codeclimate.com/github/flood-io/ruby-jmeter) [![Gem Version](https://badge.fury.io/rb/ruby-jmeter.svg)](http://badge.fury.io/rb/ruby-jmeter)
 
-> **Ruby-JMeter** is built and maintained by [Flood IO](https://flood.io?utm_source=github), an easy to use load testing platform for any scale of testing.
+> **JMeter-Ruby**  is a fork of the now defunk **Ruby-JMeter** that was built and maintained by [Flood IO](https://flood.io?utm_source=github), this gem intends to be continaution of ruby-jmeter
 
 Tired of using the JMeter GUI or looking at hairy XML files?
 
-This gem lets you write test plans for JMeter in your favourite text editor, and optionally run them on [flood.io](http://flood.io).
-
-![](https://flood.io/images/logo-flood-medium.png)
+This gem lets you write test plans for JMeter in your favourite text editor.
 
 ## Installation
 
 Install it yourself as:
 
-    $ gem install ruby-jmeter
+    $ gem install jmeter-ruby
 
 ## Basic Usage
 
-*RubyJmeter* exposes easy-to-use domain specific language for fluent communication with [JMeter](http://jmeter.apache.org/).It also includes API integration with [flood.io](https://flood.io), a cloud based load testing service.
+*RubyJmeter* exposes easy-to-use domain specific language for fluent communication with [JMeter](http://jmeter.apache.org/).
 
 To use the DSL, first let's require the gem:
 
@@ -98,43 +96,6 @@ end.run(
   jtl: 'results.jtl',
   properties: 'jmeter.properties')
 ```
-
-### Running a JMeter Test Plan on Flood IO
-
-You can also execute JMeter test plans on Flood IO using our API. To do so, you require an account and API token. If you don't know your token, sign in to [flood.io](https://flood.io/) and check your account settings.
-
-To execute the test on Flood IO, call the `flood` method on the test and pass it the API token like this.
-
-```ruby
-test do
-  threads count: 10 do
-    visit name: 'Google Search', url: 'http://google.com'
-  end
-end.flood(
-  ENV['FLOOD_API_TOKEN'],
-  name: 'Demo',
-  privacy: 'public',
-  ## Select a grid or region to distribute this flood to
-  # grid: 'pmmi24XaSMnKjGVEtutroQ',
-  # region: 'ap-southeast-2'
-)
-```
-
-This will then provide you with a link to the live test results on Flood IO like this.
-
-```
-I, [2015-02-24T11:15:25.669029 #14010]  INFO -- : Flood results at: https://flood.io/AbRWkFl7VODYCkQuy3ffvA
-```
-
-Note you will need to provide a `grid` or `region` parameter to the `.flood` method to describe which grid to distribute the flood test to. Otherwise it will default to the shared grid. You can find the Grid ID from the URL of the target grid in your [grids](https://flood.io/dashboard/grids) dashboard e.g.:
-
-![](https://s3.amazonaws.com/flood-io-support/Flood_IO_2015-02-24_11-43-21.jpg)
-
-Flood IO provides a shared grid for free, suitable for 5 minute tests, check your dashboard for the latest grid:
-
-![](https://s3.amazonaws.com/flood-io-support/Flood_IO_2015-02-24_11-44-29.jpg)
-
-Alternatively upgrade to a paid subscription on Flood IO and start your own grids on demand.
 
 ## Advanced Usage
 
@@ -384,8 +345,7 @@ end
 ```
 
 ## Roadmap
-
-This work is being sponsored by Flood IO. Get in touch with us if you'd like to be involved.
+This project is not being sposred by anyone curently but is being maintained. Get in touch with us if you'd like to be involved.
 
 ## Contributing
 
