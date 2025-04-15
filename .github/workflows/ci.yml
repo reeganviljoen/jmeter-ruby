@@ -26,29 +26,29 @@ jobs:
         bundler-cache: true
     - name: Build and test with Rake
       run: |
-        bundle exec rspec
+        MEASURE_COVERAGE=true bundle exec rspec
       env:
         RAISE_ON_WARNING: 1
         RUBY_VERSION: ${{ matrix.ruby_version }}
-    # - name: Upload coverage results
-    #   uses: actions/upload-artifact@v4.4.0
-    #   if: always()
-    #   with:
-    #     name: simplecov-resultset-ruby-ruby${{matrix.ruby_version}}
-    #     path: coverage
-    #     include-hidden-files: true
-  # coverage:
-  #   needs: test
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - uses: actions/checkout@v4.1.1
-  #   - name: Setup Ruby
-  #     uses: ruby/setup-ruby@v1
-  #     with:
-  #       ruby-version: 3.4
-  #       bundler-cache: true
-  #   - name: Download coverage results
-  #     uses: actions/download-artifact@v4.2.1
-  #   - name: Collate simplecov
-  #     run: |
-  #       bundle exec rake coverage:report
+    - name: Upload coverage results
+      uses: actions/upload-artifact@v4.4.0
+      if: always()
+      with:
+        name: simplecov-resultset-ruby${{matrix.ruby_version}}
+        path: coverage
+        include-hidden-files: true
+  coverage:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4.1.1
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.4
+        bundler-cache: true
+    - name: Download coverage results
+      uses: actions/download-artifact@v4.2.1
+    - name: Collate simplecov
+      run: |
+        bundle exec rake coverage:report
