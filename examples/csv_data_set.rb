@@ -8,12 +8,4 @@ test do
   threads count: 1 do
     visit name: 'Home', url: 'https://flooded.io?query=${postcode}'
   end
-end.flood ENV['FLOOD_API_TOKEN'],
-  privacy: 'public',
-  name: ENV['FLOOD_NAME'] ||= 'Simple Demo',
-  project: 'workspace',
-  region: ENV['REGION'] ||= 'us-west-2',
-  override_parameters: '-Dsun.net.inetaddr.ttl=30',
-  files: [
-    "#{Dir.pwd}/postcodes.csv"
-  ]
+end.run(path: '/usr/share/jmeter/bin/', gui: true)
