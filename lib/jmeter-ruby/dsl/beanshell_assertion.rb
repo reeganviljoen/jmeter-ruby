@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def beanshell_assertion(params={}, &block)
-      node = RubyJmeter::BeanshellAssertion.new(params)
+      node = JmeterRuby::BeanshellAssertion.new(params)
       attach_node(node, &block)
     end
   end

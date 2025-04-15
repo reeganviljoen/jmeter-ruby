@@ -1,4 +1,4 @@
-module RubyJmeter
+module JmeterRuby
   module Parser
 
     def parse_http_request(params)

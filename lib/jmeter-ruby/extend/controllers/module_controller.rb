@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class ExtendedDSL < DSL
     def module_controller(params, &block)
-      node = RubyJmeter::ModuleController.new(params)
+      node = JmeterRuby::ModuleController.new(params)
 
       if params[:test_fragment]
         params[:test_fragment].kind_of?(String) &&

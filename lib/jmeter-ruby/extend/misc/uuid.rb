@@ -1,4 +1,4 @@
-module RubyJmeter
+module JmeterRuby
   class ExtendedDSL < DSL
     def uuid_per_iteration(params = {}, &block)
       params[:name] ||= '__UUID'

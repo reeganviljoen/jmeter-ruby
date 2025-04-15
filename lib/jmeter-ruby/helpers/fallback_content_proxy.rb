@@ -1,6 +1,6 @@
 require 'set'
 
-module RubyJmeter
+module JmeterRuby
 
   class FallbackContextProxy
     NON_PROXIED_METHODS = Set[:object_id, :__send__, :__id__, :==, :equal?, :"!", :"!=", :instance_eval,

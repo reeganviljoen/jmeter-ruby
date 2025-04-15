@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def user_defined_variables(params={}, &block)
-      node = RubyJmeter::UserDefinedVariables.new(params)
+      node = JmeterRuby::UserDefinedVariables.new(params)
       attach_node(node, &block)
     end
   end

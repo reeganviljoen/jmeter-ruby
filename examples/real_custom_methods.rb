@@ -1,7 +1,7 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'jmeter-ruby'
 
-module RubyJmeter
+module JmeterRuby
   class ExtendedDSL < DSL
     def test_method_here
       puts "here be dragons"

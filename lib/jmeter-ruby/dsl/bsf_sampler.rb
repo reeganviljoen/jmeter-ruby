@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def bsf_sampler(params={}, &block)
-      node = RubyJmeter::BsfSampler.new(params)
+      node = JmeterRuby::BsfSampler.new(params)
       attach_node(node, &block)
     end
   end

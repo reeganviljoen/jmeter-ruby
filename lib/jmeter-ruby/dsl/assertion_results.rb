@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def assertion_results(params={}, &block)
-      node = RubyJmeter::AssertionResults.new(params)
+      node = JmeterRuby::AssertionResults.new(params)
       attach_node(node, &block)
     end
   end

@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def jms_subscriber(params={}, &block)
-      node = RubyJmeter::JmsSubscriber.new(params)
+      node = JmeterRuby::JmsSubscriber.new(params)
       attach_node(node, &block)
     end
   end

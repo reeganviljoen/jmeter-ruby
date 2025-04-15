@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def random_controller(params={}, &block)
-      node = RubyJmeter::RandomController.new(params)
+      node = JmeterRuby::RandomController.new(params)
       attach_node(node, &block)
     end
   end

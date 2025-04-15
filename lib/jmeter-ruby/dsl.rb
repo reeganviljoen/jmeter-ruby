@@ -1,4 +1,4 @@
-module RubyJmeter
+module JmeterRuby
   class ExtendedDSL < DSL
     include Parser
     attr_accessor :root
@@ -11,7 +11,7 @@ module RubyJmeter
         </hashTree>
         </jmeterTestPlan>
       EOF
-      node = RubyJmeter::TestPlan.new(params)
+      node = JmeterRuby::TestPlan.new(params)
 
       @current_node = @root.at_xpath('//jmeterTestPlan/hashTree')
       @current_node = attach_to_last(node)
@@ -98,5 +98,5 @@ module RubyJmeter
 end
 
 def test(params = {}, &block)
-  RubyJmeter.dsl_eval(RubyJmeter::ExtendedDSL.new(params), &block)
+  JmeterRuby.dsl_eval(JmeterRuby::ExtendedDSL.new(params), &block)
 end

@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def bsf_listener(params={}, &block)
-      node = RubyJmeter::BsfListener.new(params)
+      node = JmeterRuby::BsfListener.new(params)
       attach_node(node, &block)
     end
   end

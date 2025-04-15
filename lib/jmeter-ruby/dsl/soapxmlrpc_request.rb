@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def soapxmlrpc_request(params={}, &block)
-      node = RubyJmeter::SoapxmlrpcRequest.new(params)
+      node = JmeterRuby::SoapxmlrpcRequest.new(params)
       attach_node(node, &block)
     end
   end

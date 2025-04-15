@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def html_assertion(params={}, &block)
-      node = RubyJmeter::HtmlAssertion.new(params)
+      node = JmeterRuby::HtmlAssertion.new(params)
       attach_node(node, &block)
     end
   end

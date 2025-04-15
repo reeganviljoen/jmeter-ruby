@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def generate_summary_results(params={}, &block)
-      node = RubyJmeter::GenerateSummaryResults.new(params)
+      node = JmeterRuby::GenerateSummaryResults.new(params)
       attach_node(node, &block)
     end
   end

@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def regular_expression_extractor(params={}, &block)
-      node = RubyJmeter::RegularExpressionExtractor.new(params)
+      node = JmeterRuby::RegularExpressionExtractor.new(params)
       attach_node(node, &block)
     end
   end

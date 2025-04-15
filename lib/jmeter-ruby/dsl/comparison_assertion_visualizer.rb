@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def comparison_assertion_visualizer(params={}, &block)
-      node = RubyJmeter::ComparisonAssertionVisualizer.new(params)
+      node = JmeterRuby::ComparisonAssertionVisualizer.new(params)
       attach_node(node, &block)
     end
   end

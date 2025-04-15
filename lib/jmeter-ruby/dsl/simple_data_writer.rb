@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def simple_data_writer(params={}, &block)
-      node = RubyJmeter::SimpleDataWriter.new(params)
+      node = JmeterRuby::SimpleDataWriter.new(params)
       attach_node(node, &block)
     end
   end

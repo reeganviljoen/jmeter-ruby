@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def xpath_extractor(params={}, &block)
-      node = RubyJmeter::XpathExtractor.new(params)
+      node = JmeterRuby::XpathExtractor.new(params)
       attach_node(node, &block)
     end
   end

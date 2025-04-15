@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def switch_controller(params={}, &block)
-      node = RubyJmeter::SwitchController.new(params)
+      node = JmeterRuby::SwitchController.new(params)
       attach_node(node, &block)
     end
   end

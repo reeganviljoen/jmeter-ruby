@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def access_log_sampler(params={}, &block)
-      node = RubyJmeter::AccessLogSampler.new(params)
+      node = JmeterRuby::AccessLogSampler.new(params)
       attach_node(node, &block)
     end
   end

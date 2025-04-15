@@ -1,4 +1,4 @@
-module RubyJmeter
+module JmeterRuby
   class ExtendedDSL < DSL
     def user_parameters(params, &block)
       params['Argument.name'] = params[:name] if params.is_a?(Hash)

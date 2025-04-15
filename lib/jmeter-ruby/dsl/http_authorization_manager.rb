@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def http_authorization_manager(params={}, &block)
-      node = RubyJmeter::HttpAuthorizationManager.new(params)
+      node = JmeterRuby::HttpAuthorizationManager.new(params)
       attach_node(node, &block)
     end
   end

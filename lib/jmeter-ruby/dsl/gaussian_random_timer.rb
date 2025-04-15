@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def gaussian_random_timer(params={}, &block)
-      node = RubyJmeter::GaussianRandomTimer.new(params)
+      node = JmeterRuby::GaussianRandomTimer.new(params)
       attach_node(node, &block)
     end
   end

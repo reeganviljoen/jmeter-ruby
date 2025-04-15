@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def jsr223_listener(params={}, &block)
-      node = RubyJmeter::Jsr223Listener.new(params)
+      node = JmeterRuby::Jsr223Listener.new(params)
       attach_node(node, &block)
     end
   end

@@ -1,4 +1,4 @@
-module RubyJmeter
+module JmeterRuby
   class ExtendedDSL < DSL
     def soapxmlrpc_request(params, &block)
       params[:method] ||= 'POST'

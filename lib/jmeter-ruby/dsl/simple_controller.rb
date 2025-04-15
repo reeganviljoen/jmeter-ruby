@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def simple_controller(params={}, &block)
-      node = RubyJmeter::SimpleController.new(params)
+      node = JmeterRuby::SimpleController.new(params)
       attach_node(node, &block)
     end
   end

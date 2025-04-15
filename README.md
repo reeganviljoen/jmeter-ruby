@@ -13,7 +13,7 @@ Install it yourself as:
 
 ## Basic Usage
 
-*RubyJmeter* exposes easy-to-use domain specific language for fluent communication with [JMeter](http://jmeter.apache.org/).
+*JmeterRuby* exposes easy-to-use domain specific language for fluent communication with [JMeter](http://jmeter.apache.org/).
 
 To use the DSL, first let's require the gem:
 

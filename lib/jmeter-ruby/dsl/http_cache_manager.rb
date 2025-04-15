@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def http_cache_manager(params={}, &block)
-      node = RubyJmeter::HttpCacheManager.new(params)
+      node = JmeterRuby::HttpCacheManager.new(params)
       attach_node(node, &block)
     end
   end

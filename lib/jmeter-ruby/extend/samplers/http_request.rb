@@ -1,4 +1,4 @@
-module RubyJmeter
+module JmeterRuby
   class ExtendedDSL < DSL
     def http_request(*args, &block)
       params = args.shift || {}
@@ -30,7 +30,7 @@ module RubyJmeter
     end
 
     def http_request_node(params)
-      RubyJmeter::HttpRequest.new(params).tap do |node|
+      JmeterRuby::HttpRequest.new(params).tap do |node|
         node.doc.children.first.add_child (
           Nokogiri::XML(<<-EOS.strip_heredoc).children
             <stringProp name="HTTPSampler.implementation">#{params[:implementation]}</stringProp>

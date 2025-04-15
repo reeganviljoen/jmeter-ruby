@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def ldap_extended_request(params={}, &block)
-      node = RubyJmeter::LdapExtendedRequest.new(params)
+      node = JmeterRuby::LdapExtendedRequest.new(params)
       attach_node(node, &block)
     end
   end

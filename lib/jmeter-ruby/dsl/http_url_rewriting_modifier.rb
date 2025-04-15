@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def http_url_rewriting_modifier(params={}, &block)
-      node = RubyJmeter::HttpUrlRewritingModifier.new(params)
+      node = JmeterRuby::HttpUrlRewritingModifier.new(params)
       attach_node(node, &block)
     end
   end

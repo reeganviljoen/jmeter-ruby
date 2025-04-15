@@ -1,4 +1,4 @@
-module RubyJmeter
+module JmeterRuby
   module Plugins
     class UltimateThreadGroup
       attr_accessor :doc

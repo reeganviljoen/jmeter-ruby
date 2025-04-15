@@ -1,11 +1,11 @@
-module RubyJmeter
+module JmeterRuby
   class ExtendedDSL < DSL
     def regular_expression_extractor(params, &block)
       params[:refname] = params[:name]
       params[:regex] = params[:pattern]
       params[:template] = params[:template] || "$1$"
 
-      node = RubyJmeter::RegularExpressionExtractor.new(params).tap do |node|
+      node = JmeterRuby::RegularExpressionExtractor.new(params).tap do |node|
         if params[:variable]
           node.doc.xpath("//stringProp[@name='Sample.scope']").first.content = 'variable'
 

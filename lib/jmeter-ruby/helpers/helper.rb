@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   def dsl_eval(dsl, &block)
     block_context = eval("self", block.binding)
-    proxy_context = RubyJmeter::FallbackContextProxy.new(dsl, block_context)
+    proxy_context = JmeterRuby::FallbackContextProxy.new(dsl, block_context)
     begin
       block_context.instance_variables.each { |ivar| proxy_context.instance_variable_set(ivar, block_context.instance_variable_get(ivar)) }
       proxy_context.instance_eval(&block)

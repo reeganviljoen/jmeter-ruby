@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def jdbc_connection_configuration(params={}, &block)
-      node = RubyJmeter::JdbcConnectionConfiguration.new(params)
+      node = JmeterRuby::JdbcConnectionConfiguration.new(params)
       attach_node(node, &block)
     end
   end

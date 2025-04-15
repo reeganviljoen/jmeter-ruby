@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def runtime_controller(params={}, &block)
-      node = RubyJmeter::RuntimeController.new(params)
+      node = JmeterRuby::RuntimeController.new(params)
       attach_node(node, &block)
     end
   end

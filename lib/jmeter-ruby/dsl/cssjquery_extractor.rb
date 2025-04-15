@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def cssjquery_extractor(params={}, &block)
-      node = RubyJmeter::CssjqueryExtractor.new(params)
+      node = JmeterRuby::CssjqueryExtractor.new(params)
       attach_node(node, &block)
     end
   end

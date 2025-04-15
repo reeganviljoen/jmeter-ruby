@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class ExtendedDSL < DSL
     def foreach_controller(params = {}, &block)
-      node = RubyJmeter::ForeachController.new(params).tap do |node|
+      node = JmeterRuby::ForeachController.new(params).tap do |node|
         if params[:start_index]
           params[:startIndex] = params[:start_index]
           node.doc.children.first.add_child (

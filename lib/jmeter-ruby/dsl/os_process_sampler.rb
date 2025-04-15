@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def os_process_sampler(params={}, &block)
-      node = RubyJmeter::OsProcessSampler.new(params)
+      node = JmeterRuby::OsProcessSampler.new(params)
       attach_node(node, &block)
     end
   end

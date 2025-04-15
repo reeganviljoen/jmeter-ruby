@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def http_request_defaults(params={}, &block)
-      node = RubyJmeter::HttpRequestDefaults.new(params)
+      node = JmeterRuby::HttpRequestDefaults.new(params)
       attach_node(node, &block)
     end
   end

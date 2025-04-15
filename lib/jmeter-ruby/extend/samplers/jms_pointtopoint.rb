@@ -1,8 +1,8 @@
-module RubyJmeter
+module JmeterRuby
   class ExtendedDSL < DSL
     def jms_pointtopoint(params, &block)
 
-        node = RubyJmeter::JmsPointtopoint.new(params).tap do |node|
+        node = JmeterRuby::JmsPointtopoint.new(params).tap do |node|
 
           if params[:jndi_properties]
             params[:jndi_properties].map do |property_name, property_value|

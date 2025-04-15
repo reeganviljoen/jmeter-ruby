@@ -1,4 +1,4 @@
-# RubyJmeter::DSL methods
+# JmeterRuby::DSL methods
 - Test Plan
   `test_plan`
 - Counter

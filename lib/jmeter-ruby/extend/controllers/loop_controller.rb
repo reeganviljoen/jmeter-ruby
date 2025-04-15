@@ -1,4 +1,4 @@
-module RubyJmeter
+module JmeterRuby
   class ExtendedDSL < DSL
     def loop_controller(params, &block)
       params[:loops] = params[:count] || 1

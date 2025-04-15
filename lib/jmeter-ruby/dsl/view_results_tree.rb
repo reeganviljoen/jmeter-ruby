@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def view_results_tree(params={}, &block)
-      node = RubyJmeter::ViewResultsTree.new(params)
+      node = JmeterRuby::ViewResultsTree.new(params)
       attach_node(node, &block)
     end
   end

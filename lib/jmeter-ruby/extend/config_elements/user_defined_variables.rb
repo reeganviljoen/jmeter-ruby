@@ -1,4 +1,4 @@
-module RubyJmeter
+module JmeterRuby
   class ExtendedDSL < DSL
     def user_defined_variables(params, &block)
       if params.is_a?(Hash)

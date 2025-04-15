@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def xpath_assertion(params={}, &block)
-      node = RubyJmeter::XpathAssertion.new(params)
+      node = JmeterRuby::XpathAssertion.new(params)
       attach_node(node, &block)
     end
   end

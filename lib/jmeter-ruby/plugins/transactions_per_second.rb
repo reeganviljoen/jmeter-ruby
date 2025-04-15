@@ -1,4 +1,4 @@
-module RubyJmeter
+module JmeterRuby
   module Plugins
     class TransactionsPerSecond
       attr_accessor :doc

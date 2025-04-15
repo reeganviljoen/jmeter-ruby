@@ -5,7 +5,7 @@ require 'jmeter-ruby/version'
 
 Gem::Specification.new do |gem|
   gem.name          = 'jmeter-ruby'
-  gem.version       = RubyJmeter::VERSION
+  gem.version       = JmeterRuby::VERSION::STRING
   gem.authors       = ['Reegan Viljoen']
   gem.email         = ['reeganviljoen@outlook.com']
   gem.description   = %q{Ruby based DSL for writing JMeter test plans}

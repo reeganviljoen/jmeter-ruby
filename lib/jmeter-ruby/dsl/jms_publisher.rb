@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def jms_publisher(params={}, &block)
-      node = RubyJmeter::JmsPublisher.new(params)
+      node = JmeterRuby::JmsPublisher.new(params)
       attach_node(node, &block)
     end
   end

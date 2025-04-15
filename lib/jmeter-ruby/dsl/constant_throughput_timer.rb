@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def constant_throughput_timer(params={}, &block)
-      node = RubyJmeter::ConstantThroughputTimer.new(params)
+      node = JmeterRuby::ConstantThroughputTimer.new(params)
       attach_node(node, &block)
     end
   end

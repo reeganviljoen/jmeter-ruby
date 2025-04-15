@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def jsr223_postprocessor(params={}, &block)
-      node = RubyJmeter::Jsr223Postprocessor.new(params)
+      node = JmeterRuby::Jsr223Postprocessor.new(params)
       attach_node(node, &block)
     end
   end

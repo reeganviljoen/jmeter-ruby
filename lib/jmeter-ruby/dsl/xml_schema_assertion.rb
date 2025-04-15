@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def xml_schema_assertion(params={}, &block)
-      node = RubyJmeter::XmlSchemaAssertion.new(params)
+      node = JmeterRuby::XmlSchemaAssertion.new(params)
       attach_node(node, &block)
     end
   end

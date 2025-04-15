@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def md5hex_assertion(params={}, &block)
-      node = RubyJmeter::Md5hexAssertion.new(params)
+      node = JmeterRuby::Md5hexAssertion.new(params)
       attach_node(node, &block)
     end
   end

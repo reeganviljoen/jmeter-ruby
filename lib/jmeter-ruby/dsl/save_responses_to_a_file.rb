@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def save_responses_to_a_file(params={}, &block)
-      node = RubyJmeter::SaveResponsesToAFile.new(params)
+      node = JmeterRuby::SaveResponsesToAFile.new(params)
       attach_node(node, &block)
     end
   end

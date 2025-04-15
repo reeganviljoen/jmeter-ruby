@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def beanshell_listener(params={}, &block)
-      node = RubyJmeter::BeanshellListener.new(params)
+      node = JmeterRuby::BeanshellListener.new(params)
       attach_node(node, &block)
     end
   end

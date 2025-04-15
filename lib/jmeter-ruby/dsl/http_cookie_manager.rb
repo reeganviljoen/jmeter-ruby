@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def http_cookie_manager(params={}, &block)
-      node = RubyJmeter::HttpCookieManager.new(params)
+      node = JmeterRuby::HttpCookieManager.new(params)
       attach_node(node, &block)
     end
   end

@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def csv_data_set_config(params={}, &block)
-      node = RubyJmeter::CsvDataSetConfig.new(params)
+      node = JmeterRuby::CsvDataSetConfig.new(params)
       attach_node(node, &block)
     end
   end

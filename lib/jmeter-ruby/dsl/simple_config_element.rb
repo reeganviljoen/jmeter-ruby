@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def simple_config_element(params={}, &block)
-      node = RubyJmeter::SimpleConfigElement.new(params)
+      node = JmeterRuby::SimpleConfigElement.new(params)
       attach_node(node, &block)
     end
   end

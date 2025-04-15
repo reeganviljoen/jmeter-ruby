@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def constant_timer(params={}, &block)
-      node = RubyJmeter::ConstantTimer.new(params)
+      node = JmeterRuby::ConstantTimer.new(params)
       attach_node(node, &block)
     end
   end

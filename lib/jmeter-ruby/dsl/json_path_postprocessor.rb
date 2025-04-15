@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def json_path_postprocessor(params={}, &block)
-      node = RubyJmeter::JsonPathPostprocessor.new(params)
+      node = JmeterRuby::JsonPathPostprocessor.new(params)
       attach_node(node, &block)
     end
   end

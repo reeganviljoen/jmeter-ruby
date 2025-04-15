@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def once_only_controller(params={}, &block)
-      node = RubyJmeter::OnceOnlyController.new(params)
+      node = JmeterRuby::OnceOnlyController.new(params)
       attach_node(node, &block)
     end
   end
