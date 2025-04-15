@@ -17,6 +17,9 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'nokogiri'
   gem.add_runtime_dependency('json-jruby') if RUBY_PLATFORM == 'java'
 
+  gem.add_development_dependency "simplecov", "~> 0.22.0"
+  gem.add_development_dependency "simplecov-console", "~> 0.9.1"
+
   gem.files         = `git ls-files`.split($/)
   gem.executables   << 'flood'
   gem.test_files    = `git ls-files -- {spec}/*`.split("\n")
