@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'ruby-jmeter/version'
+require 'jmeter-ruby/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = 'ruby-jmeter'
+  gem.name          = 'jmeter-ruby'
   gem.version       = RubyJmeter::VERSION
   gem.authors       = ['Reegan Viljoen']
   gem.email         = ['reeganviljoen@outlook.com']

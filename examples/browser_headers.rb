@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-require 'ruby-jmeter'
+require 'jmeter-ruby'
 
 test do
   # Simulate user agent, accept and accept-encodings of typical browsers

@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-require 'ruby-jmeter'
+require 'jmeter-ruby'
 
 # Virtual user definitions
 class VirtualUser
@@ -103,9 +103,9 @@ test do
     # User workflow begins here.
     # Note that think times are defined inside the page methods.
     user.home_page
-    user.search_for_repository 'ruby-jmeter'
-    user.view_repository '/flood-io/ruby-jmeter'
-    user.view_branch '/flood-io/ruby-jmeter/tree/v2.11.8'
+    user.search_for_repository 'jmeter-ruby'
+    user.view_repository '/flood-io/jmeter-ruby'
+    user.view_branch '/flood-io/jmeter-ruby/tree/v2.11.8'
 
   end
 end.run(path: '/usr/share/jmeter/bin/', gui: true)

@@ -1,5 +1,5 @@
-# Ruby-JMeter
-> **JMeter-Ruby**  is a fork of the now defunk **Ruby-JMeter** that was built and maintained by Flood IO, this gem intends to be continaution of ruby-jmeter that is actievly maintained
+# jmeter-ruby
+> **JMeter-Ruby** is a fork of the now defunk **Ruby-JMeter** that was built and maintained by Flood IO, this gem intends to be continaution of ruby-jmeter that is actievly maintained
 
 Tired of using the JMeter GUI or looking at hairy XML files?
 
@@ -18,7 +18,7 @@ Install it yourself as:
 To use the DSL, first let's require the gem:
 
 ```ruby
-require 'ruby-jmeter'
+require 'jmeter-ruby'
 ```
 
 ### Basic Example
@@ -362,38 +362,38 @@ This project is not being sposred by anyone curently but is being maintained. Ge
 
 We use an interface description language (IDL) as a bridge between JMeter's components expressed as XML in a `.jmx` test plan to Ruby's DSL objects in this repository.
 
-To automate this `lib/ruby-jmeter/idl.rb` can be executed from the command line which will read from `lib/ruby-jmeter/idl.xml` and output to `lib/ruby-jmeter/dsl`
+To automate this `lib/jmeter-ruby/idl.rb` can be executed from the command line which will read from `lib/jmeter-ruby/idl.xml` and output to `lib/jmeter-ruby/dsl`
 
 For example:
 
 ```sh
-flood/ruby-jmeter - [master●] » ruby lib/ruby-jmeter/idl.rb
-flood/ruby-jmeter - [master●] » git status
+flood/jmeter-ruby - [master●] » ruby lib/jmeter-ruby/idl.rb
+flood/jmeter-ruby - [master●] » git status
 On branch master
 Your branch is up-to-date with 'origin/master'.
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git checkout -- <file>..." to discard changes in working directory)
 
-  modified:   lib/ruby-jmeter/DSL.md
-  modified:   lib/ruby-jmeter/dsl/foreach_controller.rb
-  modified:   lib/ruby-jmeter/dsl/http_request.rb
-  modified:   lib/ruby-jmeter/dsl/http_request_defaults.rb
-  modified:   lib/ruby-jmeter/dsl/regular_expression_extractor.rb
-  modified:   lib/ruby-jmeter/dsl/response_assertion.rb
-  modified:   lib/ruby-jmeter/dsl/test_fragment.rb
-  modified:   lib/ruby-jmeter/dsl/user_parameters.rb
+  modified:   lib/jmeter-ruby/DSL.md
+  modified:   lib/jmeter-ruby/dsl/foreach_controller.rb
+  modified:   lib/jmeter-ruby/dsl/http_request.rb
+  modified:   lib/jmeter-ruby/dsl/http_request_defaults.rb
+  modified:   lib/jmeter-ruby/dsl/regular_expression_extractor.rb
+  modified:   lib/jmeter-ruby/dsl/response_assertion.rb
+  modified:   lib/jmeter-ruby/dsl/test_fragment.rb
+  modified:   lib/jmeter-ruby/dsl/user_parameters.rb
 ```
 
-You **should never manually update** code in `lib/ruby-jmeter/dsl` as this is automatically overwritten whenever we run the IDL script. As new components / plugins are added, or major versions of JMeter are updated, we open `lib/ruby-jmeter/idl.xml` in the JMeter UI with those updates prior to running the IDL script. This makes updating between versions more easy.
+You **should never manually update** code in `lib/jmeter-ruby/dsl` as this is automatically overwritten whenever we run the IDL script. As new components / plugins are added, or major versions of JMeter are updated, we open `lib/jmeter-ruby/idl.xml` in the JMeter UI with those updates prior to running the IDL script. This makes updating between versions more easy.
 
 ### DSL
 
-Much of the behaviour of the gem is defined in `lib/ruby-jmeter/dsl.rb` which is where you should be updating code. You can extend individual DSL component behaviour in `live/ruby-jmeter/extend/**/*.rb`
+Much of the behaviour of the gem is defined in `lib/jmeter-ruby/dsl.rb` which is where you should be updating code. You can extend individual DSL component behaviour in `live/jmeter-ruby/extend/**/*.rb`
 
 ### Plugins
 
-Some custom code has been contributed particularly for support of JMeter plugins. These are not included in the IDL and as such should be added to `lib/ruby-jmeter/plugins`. Please follow some of the other examples.
+Some custom code has been contributed particularly for support of JMeter plugins. These are not included in the IDL and as such should be added to `lib/jmeter-ruby/plugins`. Please follow some of the other examples.
 
 ### Bundler
 
@@ -422,7 +422,7 @@ It is often useful to add an appropriate example for other users and for testing
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 ```
 
-    $ flood/ruby-jmeter - [master●] » ruby examples/basic_assertion.rb
+    $ flood/jmeter-ruby - [master●] » ruby examples/basic_assertion.rb
       W, [2015-10-17T19:31:12.021004 #33216]  WARN -- : Test executing locally ...
 
 Note: most of the examples assume the JMeter binary is installed in `/usr/share/jmeter/bin/` however you can modify this in your example to something that suits your installation e.g.:
