@@ -14,7 +14,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - ruby_version: "2.7.7"
           - ruby_version: "3.2"
           - ruby_version: "3.3"
           - ruby_version: "3.4"
