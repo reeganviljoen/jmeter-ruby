@@ -5,7 +5,7 @@ RSpec::Core::RakeTask.new(:spec)
 namespace :coverage do
   task :report do
     require "simplecov"
-    require "simplecov-consimplecovsole"
+    require "simplecov-console"
 
     SimpleCov.minimum_coverage 75
 
