@@ -1,7 +1,7 @@
 module JmeterRuby
   module VERSION
     MAJOR = 3
-    MINOR = 22
+    MINOR = 0
     PATCH = 0
     PRE = nil
 
