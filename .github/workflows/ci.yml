@@ -34,7 +34,7 @@ jobs:
       uses: actions/upload-artifact@v4.4.0
       if: always()
       with:
-        name: simplecov-resultset-ruby-ruby${{matrix.ruby_version}}
+        name: simplecov-resultset-ruby${{matrix.ruby_version}}
         path: coverage
         include-hidden-files: true
   coverage:
