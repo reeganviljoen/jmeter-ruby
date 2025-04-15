@@ -6,7 +6,7 @@ module RubyJmeter
     def initialize(params = {})
       @root = Nokogiri::XML(<<-EOF.strip_heredoc)
         <?xml version="1.0" encoding="UTF-8"?>
-        <jmeterTestPlan version="1.2" properties="3.1" jmeter="3.1" ruby-jmeter="3.0">
+        <jmeterTestPlan version="1.2" properties="3.1" jmeter="3.1" jmeter-ruby="3.0">
         <hashTree>
         </hashTree>
         </jmeterTestPlan>
@@ -73,7 +73,7 @@ module RubyJmeter
     end
 
     def file(params = {})
-      params[:file] ||= 'ruby-jmeter.jmx'
+      params[:file] ||= 'jmeter-ruby.jmx'
       File.open(params[:file], 'w') { |file| file.write(doc.to_xml(indent: 2)) }
     end
 

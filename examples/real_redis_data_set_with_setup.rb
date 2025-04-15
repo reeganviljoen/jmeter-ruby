@@ -14,7 +14,7 @@
 ################################################################################
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-require 'ruby-jmeter'
+require 'jmeter-ruby'
 
 # For redis dataset config.
 redis_host = 'localhost'
