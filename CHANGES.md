@@ -10,7 +10,7 @@
 
 ## v2.11.11
 
-- Support for `test_fragment` for use with the `module_controller`. [See example here](https://github.com/flood-io/jmeter-ruby/blob/master/examples/basic_test_fragment.rb).
+- Support for `test_fragment` for use with the `module_controller`. [See example here](https://github.com/flood-io/ruby-jmeter/blob/master/examples/basic_test_fragment.rb).
 
 ## v2.11.5
 

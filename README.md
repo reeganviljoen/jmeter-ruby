@@ -1,5 +1,5 @@
 # jmeter-ruby
-> **JMeter-Ruby**  is a fork of the now defunk **jmeter-ruby** that was built and maintained by Flood IO, this gem intends to be continaution of jmeter-ruby that is actievly maintained
+> **JMeter-Ruby** is a fork of the now defunk **Ruby-JMeter** that was built and maintained by Flood IO, this gem intends to be continaution of ruby-jmeter that is actievly maintained
 
 Tired of using the JMeter GUI or looking at hairy XML files?
 
