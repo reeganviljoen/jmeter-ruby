@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def ajp13_sampler(params={}, &block)
-      node = RubyJmeter::Ajp13Sampler.new(params)
+      node = JmeterRuby::Ajp13Sampler.new(params)
       attach_node(node, &block)
     end
   end

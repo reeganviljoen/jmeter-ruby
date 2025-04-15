@@ -1,4 +1,4 @@
-module RubyJmeter
+module JmeterRuby
   module Plugins
     class SteppingThreadGroup
       attr_accessor :doc

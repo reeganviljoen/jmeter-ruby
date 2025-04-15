@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def login_config_element(params={}, &block)
-      node = RubyJmeter::LoginConfigElement.new(params)
+      node = JmeterRuby::LoginConfigElement.new(params)
       attach_node(node, &block)
     end
   end

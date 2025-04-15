@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def test_plan(params={}, &block)
-      node = RubyJmeter::TestPlan.new(params)
+      node = JmeterRuby::TestPlan.new(params)
       attach_node(node, &block)
     end
   end

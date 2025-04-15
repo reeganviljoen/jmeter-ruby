@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def jdbc_preprocessor(params={}, &block)
-      node = RubyJmeter::JdbcPreprocessor.new(params)
+      node = JmeterRuby::JdbcPreprocessor.new(params)
       attach_node(node, &block)
     end
   end

@@ -1,4 +1,4 @@
-module RubyJmeter
+module JmeterRuby
   module Plugins
     class LatenciesOverTime
       attr_accessor :doc

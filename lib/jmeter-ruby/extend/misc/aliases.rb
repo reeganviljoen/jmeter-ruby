@@ -1,4 +1,4 @@
-module RubyJmeter
+module JmeterRuby
   class ExtendedDSL < DSL
     alias auth http_authorization_manager
     alias soap soapxmlrpc_request

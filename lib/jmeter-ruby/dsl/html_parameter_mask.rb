@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def html_parameter_mask(params={}, &block)
-      node = RubyJmeter::HtmlParameterMask.new(params)
+      node = JmeterRuby::HtmlParameterMask.new(params)
       attach_node(node, &block)
     end
   end

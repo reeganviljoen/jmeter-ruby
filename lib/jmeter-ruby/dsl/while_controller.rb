@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def while_controller(params={}, &block)
-      node = RubyJmeter::WhileController.new(params)
+      node = JmeterRuby::WhileController.new(params)
       attach_node(node, &block)
     end
   end

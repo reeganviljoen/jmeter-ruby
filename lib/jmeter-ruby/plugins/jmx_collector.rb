@@ -1,4 +1,4 @@
-module RubyJmeter
+module JmeterRuby
   module Plugins
     class JMXCollector
       attr_accessor :doc

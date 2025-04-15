@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def loop_controller(params={}, &block)
-      node = RubyJmeter::LoopController.new(params)
+      node = JmeterRuby::LoopController.new(params)
       attach_node(node, &block)
     end
   end

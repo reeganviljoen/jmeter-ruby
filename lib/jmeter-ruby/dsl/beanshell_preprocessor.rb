@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def beanshell_preprocessor(params={}, &block)
-      node = RubyJmeter::BeanshellPreprocessor.new(params)
+      node = JmeterRuby::BeanshellPreprocessor.new(params)
       attach_node(node, &block)
     end
   end

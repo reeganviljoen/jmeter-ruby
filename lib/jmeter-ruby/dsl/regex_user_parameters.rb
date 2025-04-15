@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def regex_user_parameters(params={}, &block)
-      node = RubyJmeter::RegexUserParameters.new(params)
+      node = JmeterRuby::RegexUserParameters.new(params)
       attach_node(node, &block)
     end
   end

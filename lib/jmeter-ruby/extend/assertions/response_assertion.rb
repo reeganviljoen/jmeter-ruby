@@ -1,4 +1,4 @@
-module RubyJmeter
+module JmeterRuby
   class ExtendedDSL < DSL
     def response_assertion(params, &block)
       params[:test_type] = parse_test_type(params)
@@ -7,10 +7,10 @@ module RubyJmeter
       if params[:json]
         params[:EXPECTED_VALUE] = params[:value]
         params[:JSON_PATH] = params[:json]
-        node = RubyJmeter::Plugins::JsonPathAssertion.new(params)
+        node = JmeterRuby::Plugins::JsonPathAssertion.new(params)
       end
 
-      node ||= RubyJmeter::ResponseAssertion.new(params).tap do |node|
+      node ||= JmeterRuby::ResponseAssertion.new(params).tap do |node|
         if params[:variable]
           params['Scope.variable'] = params[:variable]
           node.doc.xpath("//stringProp[@name='Assertion.scope']").first.content = 'variable'

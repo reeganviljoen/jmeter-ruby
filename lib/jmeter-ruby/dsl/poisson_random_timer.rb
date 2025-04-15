@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def poisson_random_timer(params={}, &block)
-      node = RubyJmeter::PoissonRandomTimer.new(params)
+      node = JmeterRuby::PoissonRandomTimer.new(params)
       attach_node(node, &block)
     end
   end

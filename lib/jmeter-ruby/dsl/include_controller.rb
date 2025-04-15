@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def include_controller(params={}, &block)
-      node = RubyJmeter::IncludeController.new(params)
+      node = JmeterRuby::IncludeController.new(params)
       attach_node(node, &block)
     end
   end

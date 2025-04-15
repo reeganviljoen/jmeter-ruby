@@ -1,4 +1,4 @@
-module RubyJmeter
+module JmeterRuby
   class ExtendedDSL < DSL
     def http_header_manager(params, &block)
       if params.is_a?(Hash)

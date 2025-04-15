@@ -1,4 +1,10 @@
 # Changes
+## v3.0.0
+- Add Github Actions CI
+- Add support foir modern Rubies
+- Add code coverage
+- Remove Flood io
+- Rename to jmeter-ruby
 
 ## v2.13.2
 

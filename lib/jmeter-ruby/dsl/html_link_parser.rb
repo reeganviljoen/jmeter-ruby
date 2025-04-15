@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def html_link_parser(params={}, &block)
-      node = RubyJmeter::HtmlLinkParser.new(params)
+      node = JmeterRuby::HtmlLinkParser.new(params)
       attach_node(node, &block)
     end
   end

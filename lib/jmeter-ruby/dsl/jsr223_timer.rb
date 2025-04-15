@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def jsr223_timer(params={}, &block)
-      node = RubyJmeter::Jsr223Timer.new(params)
+      node = JmeterRuby::Jsr223Timer.new(params)
       attach_node(node, &block)
     end
   end

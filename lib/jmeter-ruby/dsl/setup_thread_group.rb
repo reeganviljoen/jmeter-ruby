@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def setup_thread_group(params={}, &block)
-      node = RubyJmeter::SetupThreadGroup.new(params)
+      node = JmeterRuby::SetupThreadGroup.new(params)
       attach_node(node, &block)
     end
   end

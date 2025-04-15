@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-module RubyJmeter
+module JmeterRuby
   class ExtendedDSL < DSL
     def http_cookie_manager(params = {}, &block)
       params[:clearEachIteration] = true if params.keys.include? :clear_each_iteration
 
-      node = RubyJmeter::HttpCookieManager.new(params)
+      node = JmeterRuby::HttpCookieManager.new(params)
 
       params[:user_defined_cookies]&.each { |cookie| add_cookie_to_collection(cookie, node) }
 

@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def transaction_controller(params={}, &block)
-      node = RubyJmeter::TransactionController.new(params)
+      node = JmeterRuby::TransactionController.new(params)
       attach_node(node, &block)
     end
   end

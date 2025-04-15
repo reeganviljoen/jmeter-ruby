@@ -26,24 +26,24 @@ class String
 end
 
 results = []
-doc.traverse do |node| 
-  results << node if node.class != 
-    Nokogiri::XML::Document && 
+doc.traverse do |node|
+  results << node if node.class !=
+    Nokogiri::XML::Document &&
     node.attributes['testclass'] &&
     node.name != 'elementProp'
 end
 
 methods = []
-methods << "# RubyJmeter::DSL methods"
+methods << "# JmeterRuby::DSL methods"
 results.each do |element|
   klass = element.attributes['testname'].to_s.classify
   methods << "- #{element.attributes['testname'].to_s}\n  `#{klass.underscore}`"
   Dir.mkdir(dsl, 0700) unless Dir.exist? dsl
   File.open("#{dsl}/#{klass.underscore}.rb", 'w') { |file| file.write(<<EOC)
-module RubyJmeter
+module JmeterRuby
   class DSL
     def #{klass.underscore}(params={}, &block)
-      node = RubyJmeter::#{klass}.new(params)
+      node = JmeterRuby::#{klass}.new(params)
       attach_node(node, &block)
     end
   end

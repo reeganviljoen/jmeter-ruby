@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def java_request(params={}, &block)
-      node = RubyJmeter::JavaRequest.new(params)
+      node = JmeterRuby::JavaRequest.new(params)
       attach_node(node, &block)
     end
   end

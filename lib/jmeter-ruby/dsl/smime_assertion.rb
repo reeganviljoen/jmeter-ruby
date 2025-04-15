@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def smime_assertion(params={}, &block)
-      node = RubyJmeter::SmimeAssertion.new(params)
+      node = JmeterRuby::SmimeAssertion.new(params)
       attach_node(node, &block)
     end
   end

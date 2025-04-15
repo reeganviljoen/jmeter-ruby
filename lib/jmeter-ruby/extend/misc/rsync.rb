@@ -1,4 +1,4 @@
-module RubyJmeter
+module JmeterRuby
   class ExtendedDSL < DSL
     def rsync(params = {})
       logger.warn "Test file upload via rsync ..."

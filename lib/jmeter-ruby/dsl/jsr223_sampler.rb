@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def jsr223_sampler(params={}, &block)
-      node = RubyJmeter::Jsr223Sampler.new(params)
+      node = JmeterRuby::Jsr223Sampler.new(params)
       attach_node(node, &block)
     end
   end

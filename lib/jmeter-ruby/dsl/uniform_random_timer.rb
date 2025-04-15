@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def uniform_random_timer(params={}, &block)
-      node = RubyJmeter::UniformRandomTimer.new(params)
+      node = JmeterRuby::UniformRandomTimer.new(params)
       attach_node(node, &block)
     end
   end

@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def response_time_graph(params={}, &block)
-      node = RubyJmeter::ResponseTimeGraph.new(params)
+      node = JmeterRuby::ResponseTimeGraph.new(params)
       attach_node(node, &block)
     end
   end

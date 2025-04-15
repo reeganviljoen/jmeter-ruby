@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def http_header_manager(params={}, &block)
-      node = RubyJmeter::HttpHeaderManager.new(params)
+      node = JmeterRuby::HttpHeaderManager.new(params)
       attach_node(node, &block)
     end
   end

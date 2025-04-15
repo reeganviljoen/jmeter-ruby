@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def recording_controller(params={}, &block)
-      node = RubyJmeter::RecordingController.new(params)
+      node = JmeterRuby::RecordingController.new(params)
       attach_node(node, &block)
     end
   end

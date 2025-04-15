@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def aggregate_graph(params={}, &block)
-      node = RubyJmeter::AggregateGraph.new(params)
+      node = JmeterRuby::AggregateGraph.new(params)
       attach_node(node, &block)
     end
   end

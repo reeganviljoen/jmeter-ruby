@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def throughput_controller(params={}, &block)
-      node = RubyJmeter::ThroughputController.new(params)
+      node = JmeterRuby::ThroughputController.new(params)
       attach_node(node, &block)
     end
   end

@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def beanshell_timer(params={}, &block)
-      node = RubyJmeter::BeanshellTimer.new(params)
+      node = JmeterRuby::BeanshellTimer.new(params)
       attach_node(node, &block)
     end
   end

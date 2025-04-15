@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def result_status_action_handler(params={}, &block)
-      node = RubyJmeter::ResultStatusActionHandler.new(params)
+      node = JmeterRuby::ResultStatusActionHandler.new(params)
       attach_node(node, &block)
     end
   end

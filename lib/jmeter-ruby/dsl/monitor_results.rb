@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def monitor_results(params={}, &block)
-      node = RubyJmeter::MonitorResults.new(params)
+      node = JmeterRuby::MonitorResults.new(params)
       attach_node(node, &block)
     end
   end

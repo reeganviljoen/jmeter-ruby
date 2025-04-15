@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def jms_pointtopoint(params={}, &block)
-      node = RubyJmeter::JmsPointtopoint.new(params)
+      node = JmeterRuby::JmsPointtopoint.new(params)
       attach_node(node, &block)
     end
   end

@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def graph_results(params={}, &block)
-      node = RubyJmeter::GraphResults.new(params)
+      node = JmeterRuby::GraphResults.new(params)
       attach_node(node, &block)
     end
   end

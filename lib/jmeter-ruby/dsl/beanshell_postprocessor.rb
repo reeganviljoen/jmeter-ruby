@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def beanshell_postprocessor(params={}, &block)
-      node = RubyJmeter::BeanshellPostprocessor.new(params)
+      node = JmeterRuby::BeanshellPostprocessor.new(params)
       attach_node(node, &block)
     end
   end

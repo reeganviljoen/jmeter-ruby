@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def bsf_postprocessor(params={}, &block)
-      node = RubyJmeter::BsfPostprocessor.new(params)
+      node = JmeterRuby::BsfPostprocessor.new(params)
       attach_node(node, &block)
     end
   end

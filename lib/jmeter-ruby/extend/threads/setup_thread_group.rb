@@ -1,4 +1,4 @@
-module RubyJmeter
+module JmeterRuby
   class ExtendedDSL < DSL
     def setup_thread_group(*args, &block)
       params = args.shift || {}
@@ -10,7 +10,7 @@ module RubyJmeter
       params[:duration] ||= 60
       params[:continue_forever] ||= false
       params[:loops] = -1 if params[:continue_forever]
-      node = RubyJmeter::SetupThreadGroup.new(params)
+      node = JmeterRuby::SetupThreadGroup.new(params)
 
       attach_node(node, &block)
     end

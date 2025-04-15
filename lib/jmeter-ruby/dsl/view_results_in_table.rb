@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def view_results_in_table(params={}, &block)
-      node = RubyJmeter::ViewResultsInTable.new(params)
+      node = JmeterRuby::ViewResultsInTable.new(params)
       attach_node(node, &block)
     end
   end

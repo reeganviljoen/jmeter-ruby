@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def bsf_timer(params={}, &block)
-      node = RubyJmeter::BsfTimer.new(params)
+      node = JmeterRuby::BsfTimer.new(params)
       attach_node(node, &block)
     end
   end

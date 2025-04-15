@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def distribution_graphalpha(params={}, &block)
-      node = RubyJmeter::DistributionGraphalpha.new(params)
+      node = JmeterRuby::DistributionGraphalpha.new(params)
       attach_node(node, &block)
     end
   end

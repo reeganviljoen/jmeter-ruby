@@ -1,4 +1,4 @@
-module RubyJmeter
+module JmeterRuby
   class UserAgent
     def initialize(device)
       @common_devices = {

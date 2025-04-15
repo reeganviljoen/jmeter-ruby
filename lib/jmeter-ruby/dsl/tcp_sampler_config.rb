@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def tcp_sampler_config(params={}, &block)
-      node = RubyJmeter::TcpSamplerConfig.new(params)
+      node = JmeterRuby::TcpSamplerConfig.new(params)
       attach_node(node, &block)
     end
   end

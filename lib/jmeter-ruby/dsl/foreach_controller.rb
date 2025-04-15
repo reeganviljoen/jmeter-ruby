@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def foreach_controller(params={}, &block)
-      node = RubyJmeter::ForeachController.new(params)
+      node = JmeterRuby::ForeachController.new(params)
       attach_node(node, &block)
     end
   end

@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def compare_assertion(params={}, &block)
-      node = RubyJmeter::CompareAssertion.new(params)
+      node = JmeterRuby::CompareAssertion.new(params)
       attach_node(node, &block)
     end
   end

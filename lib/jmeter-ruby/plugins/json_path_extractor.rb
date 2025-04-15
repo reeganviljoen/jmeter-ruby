@@ -1,4 +1,4 @@
-module RubyJmeter
+module JmeterRuby
   module Plugins
     class JsonPathExtractor
       attr_accessor :doc

@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def mailer_visualizer(params={}, &block)
-      node = RubyJmeter::MailerVisualizer.new(params)
+      node = JmeterRuby::MailerVisualizer.new(params)
       attach_node(node, &block)
     end
   end

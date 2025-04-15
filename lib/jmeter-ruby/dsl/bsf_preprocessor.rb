@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def bsf_preprocessor(params={}, &block)
-      node = RubyJmeter::BsfPreprocessor.new(params)
+      node = JmeterRuby::BsfPreprocessor.new(params)
       attach_node(node, &block)
     end
   end

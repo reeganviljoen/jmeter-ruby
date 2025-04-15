@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def ftp_request(params={}, &block)
-      node = RubyJmeter::FtpRequest.new(params)
+      node = JmeterRuby::FtpRequest.new(params)
       attach_node(node, &block)
     end
   end

@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def bsf_assertion(params={}, &block)
-      node = RubyJmeter::BsfAssertion.new(params)
+      node = JmeterRuby::BsfAssertion.new(params)
       attach_node(node, &block)
     end
   end

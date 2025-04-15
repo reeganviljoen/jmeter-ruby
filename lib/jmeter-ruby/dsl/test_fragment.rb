@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def test_fragment(params={}, &block)
-      node = RubyJmeter::TestFragment.new(params)
+      node = JmeterRuby::TestFragment.new(params)
       attach_node(node, &block)
     end
   end

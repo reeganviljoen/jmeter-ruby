@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def mail_reader_sampler(params={}, &block)
-      node = RubyJmeter::MailReaderSampler.new(params)
+      node = JmeterRuby::MailReaderSampler.new(params)
       attach_node(node, &block)
     end
   end

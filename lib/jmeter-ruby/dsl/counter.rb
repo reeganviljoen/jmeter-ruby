@@ -1,7 +1,7 @@
-module RubyJmeter
+module JmeterRuby
   class DSL
     def counter(params={}, &block)
-      node = RubyJmeter::Counter.new(params)
+      node = JmeterRuby::Counter.new(params)
       attach_node(node, &block)
     end
   end
