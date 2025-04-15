@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    name: test (${{ matrix.rails_version }}, ${{ matrix.ruby_version }}, ${{ matrix.mode }})
+    name: test ruby-${{ matrix.ruby_version }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -23,8 +23,6 @@ jobs:
         ruby-version: ${{ matrix.ruby_version }}
         bundler-cache: true
     - name: Build and test with Rake
-      # Code-reloading isn't compatible with simplecov, so we need to run once
-      # to collect coverage, and again to test reloads.
       run: |
         bundle exec rspec
       env:
@@ -34,7 +32,7 @@ jobs:
     #   uses: actions/upload-artifact@v4.4.0
     #   if: always()
     #   with:
-    #     name: simplecov-resultset-rails${{matrix.rails_version}}-ruby${{matrix.ruby_version}}-${{matrix.mode}}
+    #     name: simplecov-resultset-ruby-ruby${{matrix.ruby_version}}
     #     path: coverage
     #     include-hidden-files: true
   # coverage:
