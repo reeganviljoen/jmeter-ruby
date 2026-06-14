@@ -4,6 +4,7 @@
 - Raise the supported Ruby floor to 3.3.0 and test supported Ruby branches in CI.
 - Refresh GitHub Actions versions and add Dependabot automation for Bundler and GitHub Actions.
 - Clean up gemspec metadata for release builds.
+- Replace the stale release script with the current Bundler/RubyGems release flow and document it.
 
 ## v3.0.0
 - Add Github Actions CI
