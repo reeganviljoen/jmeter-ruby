@@ -29,6 +29,55 @@ tag_exists() {
     git ls-remote --exit-code --tags origin "refs/tags/v${version}" > /dev/null
 }
 
+github_release_exists() {
+  local version="$1"
+
+  gh release view "v${version}" > /dev/null 2>&1
+}
+
+require_github_cli() {
+  if ! command -v gh > /dev/null; then
+    echo "Error: GitHub CLI is required to create the GitHub release."
+    echo "Install it from https://cli.github.com/ and run gh auth login."
+    exit 1
+  fi
+
+  if ! gh auth status -h github.com > /dev/null 2>&1; then
+    echo "Error: GitHub CLI is not authenticated."
+    echo "Run gh auth login before releasing."
+    exit 1
+  fi
+}
+
+write_release_notes() {
+  local version="$1"
+  local notes_file="$2"
+
+  awk -v heading="## v${version}" '
+    $0 == heading { in_section = 1; next }
+    in_section && /^## / { exit }
+    in_section { print }
+  ' CHANGES.md > "$notes_file"
+
+  if [ ! -s "$notes_file" ]; then
+    echo "Error: no release notes found for v${version} in CHANGES.md."
+    exit 1
+  fi
+}
+
+create_github_release() {
+  local version="$1"
+  local notes_file
+
+  notes_file="$(mktemp)"
+  trap 'rm -f "$notes_file"' EXIT
+
+  write_release_notes "$version" "$notes_file"
+  gh release create "v${version}" \
+    --title "v${version}" \
+    --notes-file "$notes_file"
+}
+
 main() {
   local version
   version="$(current_version)"
@@ -62,19 +111,26 @@ main() {
     exit 1
   fi
 
+  require_github_cli
+
+  if github_release_exists "$version"; then
+    echo "Error: GitHub release v${version} already exists."
+    exit 1
+  fi
+
   bundle install
   bundle exec rake spec
   bundle exec rake build
 
   if [ "${DRY_RUN:-}" = "1" ]; then
-    echo "Dry run complete. Skipping: bundle exec rake release"
+    echo "Dry run complete. Skipping: bundle exec rake release and gh release create"
     exit 0
   fi
 
   bundle exec rake release
+  create_github_release "$version"
 
   echo "Released jmeter-ruby ${version}."
-  echo "Next: create a GitHub release for tag v${version} using the notes in CHANGES.md."
 }
 
 main

@@ -5,6 +5,7 @@
 - Refresh GitHub Actions versions and add Dependabot automation for Bundler and GitHub Actions.
 - Clean up gemspec metadata for release builds.
 - Replace the stale release script with the current Bundler/RubyGems release flow and document it.
+- Create the GitHub release from `script/release` using the matching `CHANGES.md` notes.
 
 ## v3.0.0
 - Add Github Actions CI
