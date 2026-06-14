@@ -49,6 +49,23 @@ require_github_cli() {
   fi
 }
 
+require_rubygems_credentials() {
+  if gem owner jmeter-ruby > /dev/null 2>&1; then
+    return
+  fi
+
+  if [ -t 0 ]; then
+    echo "RubyGems credentials are missing or invalid. Starting gem signin."
+    gem signin
+  fi
+
+  if ! gem owner jmeter-ruby > /dev/null 2>&1; then
+    echo "Error: RubyGems credentials are missing, invalid, or cannot access jmeter-ruby."
+    echo "Run gem signin, make sure you are an owner of jmeter-ruby, then rerun script/release."
+    exit 1
+  fi
+}
+
 write_release_notes() {
   local version="$1"
   local notes_file="$2"
@@ -76,6 +93,17 @@ create_github_release() {
   gh release create "v${version}" \
     --title "v${version}" \
     --notes-file "$notes_file"
+}
+
+release_tag_and_gem() {
+  local version="$1"
+
+  if tag_exists "$version"; then
+    echo "Tag v${version} already exists. Skipping gem publish and tag creation."
+    return
+  fi
+
+  bundle exec rake release
 }
 
 main() {
@@ -106,12 +134,8 @@ main() {
     exit 1
   fi
 
-  if tag_exists "$version"; then
-    echo "Error: tag v${version} already exists."
-    exit 1
-  fi
-
   require_github_cli
+  require_rubygems_credentials
 
   if github_release_exists "$version"; then
     echo "Error: GitHub release v${version} already exists."
@@ -127,7 +151,7 @@ main() {
     exit 0
   fi
 
-  bundle exec rake release
+  release_tag_and_gem "$version"
   create_github_release "$version"
 
   echo "Released jmeter-ruby ${version}."

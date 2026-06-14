@@ -427,6 +427,8 @@ script/release
 
 The release script verifies that `main` is clean and synced, runs `bundle install`, runs the specs, builds the gem, and then delegates publishing to `bundle exec rake release`. That Bundler task creates and pushes the `vX.Y.Z` git tag and pushes the gem to RubyGems.org. After that, the script creates the GitHub release for the same tag using the matching `CHANGES.md` section.
 
+If the gem/tag publish succeeds but GitHub release creation fails, rerun `script/release`. The script will reuse the existing tag and finish creating the GitHub release.
+
 To check the release flow without publishing:
 
 ```sh
