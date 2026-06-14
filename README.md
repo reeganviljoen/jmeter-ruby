@@ -421,8 +421,11 @@ Releases use Bundler's gem release task. Prepare the version bump and `CHANGES.m
 ```sh
 git switch main
 git pull origin main
-gem signin
-script/release
+mise trust
+mise install
+mise exec -- gem signin
+gh auth login
+mise exec -- script/release
 ```
 
 The release script verifies that `main` is clean and synced, runs `bundle install`, runs the specs, builds the gem, and then delegates publishing to `bundle exec rake release`. That Bundler task creates and pushes the `vX.Y.Z` git tag and pushes the gem to RubyGems.org. After that, the script creates the GitHub release for the same tag using the matching `CHANGES.md` section.
@@ -432,7 +435,7 @@ If the gem/tag publish succeeds but GitHub release creation fails, rerun `script
 To check the release flow without publishing:
 
 ```sh
-DRY_RUN=1 script/release
+DRY_RUN=1 mise exec -- script/release
 ```
 
 ### Examples

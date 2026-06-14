@@ -7,6 +7,7 @@
 - Replace the stale release script with the current Bundler/RubyGems release flow and document it.
 - Create the GitHub release from `script/release` using the matching `CHANGES.md` notes.
 - Make `script/release` fail earlier on missing RubyGems credentials and resume GitHub release creation when the release tag already exists.
+- Make `script/release` fail early when macOS system Ruby is active and document running releases through mise.
 
 ## v3.0.0
 - Add Github Actions CI
