@@ -8,6 +8,7 @@
 - Create the GitHub release from `script/release` using the matching `CHANGES.md` notes.
 - Make `script/release` fail earlier on missing RubyGems credentials and resume GitHub release creation when the release tag already exists.
 - Make `script/release` fail early when macOS system Ruby is active and document running releases through mise.
+- Make `script/release` automatically re-run through mise when the active shell is using the wrong Ruby.
 
 ## v3.0.0
 - Add Github Actions CI

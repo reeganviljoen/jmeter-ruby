@@ -10,6 +10,21 @@ current_version() {
   ruby ./lib/jmeter-ruby/version.rb
 }
 
+run_with_mise_if_available() {
+  if [ "${JMETER_RUBY_RELEASE_MISE:-}" = "1" ]; then
+    return 1
+  fi
+
+  if ! command -v mise > /dev/null; then
+    return 1
+  fi
+
+  echo "Active Ruby is not supported. Re-running release with mise."
+  mise trust
+  mise install
+  JMETER_RUBY_RELEASE_MISE=1 exec mise exec -- "$0" "$@"
+}
+
 required_ruby_version() {
   ruby -e 'spec = Gem::Specification.load("jmeter-ruby.gemspec"); puts spec.required_ruby_version.requirements.first.last'
 }
@@ -29,11 +44,14 @@ require_supported_ruby() {
     return
   fi
 
+  run_with_mise_if_available "$@"
+
   echo "Error: Ruby ${required_version} or newer is required, but active ruby is ${active_version}."
   echo "Active ruby: $(command -v ruby)"
   echo "Install/activate the project Ruby first, for example:"
   echo "  mise trust && mise install"
-  echo "  mise exec -- script/release"
+  echo "Then rerun:"
+  echo "  script/release"
   exit 1
 }
 
@@ -159,7 +177,7 @@ release_tag_and_gem() {
 main() {
   local version
 
-  require_supported_ruby
+  require_supported_ruby "$@"
   require_bundler
 
   version="$(current_version)"
