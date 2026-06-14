@@ -10,74 +10,6 @@ current_version() {
   ruby ./lib/jmeter-ruby/version.rb
 }
 
-run_with_mise_if_available() {
-  if [ "${JMETER_RUBY_RELEASE_MISE:-}" = "1" ]; then
-    return 1
-  fi
-
-  if ! command -v mise > /dev/null; then
-    return 1
-  fi
-
-  echo "Active Ruby is not supported. Re-running release with mise."
-  mise trust
-  mise install
-  JMETER_RUBY_RELEASE_MISE=1 exec mise exec -- "$0" "$@"
-}
-
-required_ruby_version() {
-  ruby -e 'spec = Gem::Specification.load("jmeter-ruby.gemspec"); puts spec.required_ruby_version.requirements.first.last'
-}
-
-current_ruby_version() {
-  ruby -e 'puts RUBY_VERSION'
-}
-
-require_supported_ruby() {
-  local required_version
-  local active_version
-
-  required_version="$(required_ruby_version)"
-  active_version="$(current_ruby_version)"
-
-  if ruby -e "exit(Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('$required_version'))"; then
-    return
-  fi
-
-  run_with_mise_if_available "$@"
-
-  echo "Error: Ruby ${required_version} or newer is required, but active ruby is ${active_version}."
-  echo "Active ruby: $(command -v ruby)"
-  echo "Install/activate the project Ruby first, for example:"
-  echo "  mise trust && mise install"
-  echo "Then rerun:"
-  echo "  script/release"
-  exit 1
-}
-
-require_bundler() {
-  if command -v bundle > /dev/null && bundle -v > /dev/null 2>&1; then
-    return
-  fi
-
-  echo "Error: Bundler is not available for the active Ruby."
-  echo "Active ruby: $(command -v ruby)"
-  if [ -f Gemfile.lock ]; then
-    local bundled_version
-    bundled_version="$(awk '/^BUNDLED WITH$/ { getline; gsub(/^[[:space:]]+/, ""); print; exit }' Gemfile.lock)"
-
-    if [ -n "$bundled_version" ]; then
-      echo "Install the locked Bundler for this Ruby with:"
-      echo "  gem install bundler:${bundled_version}"
-      exit 1
-    fi
-  fi
-
-  echo "Install Bundler for this Ruby with:"
-  echo "  gem install bundler"
-  exit 1
-}
-
 working_tree_is_clean() {
   [ -z "$(git status --porcelain)" ]
 }
@@ -117,23 +49,6 @@ require_github_cli() {
   fi
 }
 
-require_rubygems_credentials() {
-  if gem owner jmeter-ruby > /dev/null 2>&1; then
-    return
-  fi
-
-  if [ -t 0 ]; then
-    echo "RubyGems credentials are missing or invalid. Starting gem signin."
-    gem signin
-  fi
-
-  if ! gem owner jmeter-ruby > /dev/null 2>&1; then
-    echo "Error: RubyGems credentials are missing, invalid, or cannot access jmeter-ruby."
-    echo "Run gem signin, make sure you are an owner of jmeter-ruby, then rerun script/release."
-    exit 1
-  fi
-}
-
 write_release_notes() {
   local version="$1"
   local notes_file="$2"
@@ -163,23 +78,8 @@ create_github_release() {
     --notes-file "$notes_file"
 }
 
-release_tag_and_gem() {
-  local version="$1"
-
-  if tag_exists "$version"; then
-    echo "Tag v${version} already exists. Skipping gem publish and tag creation."
-    return
-  fi
-
-  bundle exec rake release
-}
-
 main() {
   local version
-
-  require_supported_ruby "$@"
-  require_bundler
-
   version="$(current_version)"
 
   echo "Preparing to release jmeter-ruby ${version}"
@@ -206,8 +106,12 @@ main() {
     exit 1
   fi
 
+  if tag_exists "$version"; then
+    echo "Error: tag v${version} already exists."
+    exit 1
+  fi
+
   require_github_cli
-  require_rubygems_credentials
 
   if github_release_exists "$version"; then
     echo "Error: GitHub release v${version} already exists."
@@ -223,7 +127,7 @@ main() {
     exit 0
   fi
 
-  release_tag_and_gem "$version"
+  bundle exec rake release
   create_github_release "$version"
 
   echo "Released jmeter-ruby ${version}."
