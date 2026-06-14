@@ -14,13 +14,13 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - ruby_version: "3.2"
           - ruby_version: "3.3"
           - ruby_version: "3.4"
+          - ruby_version: "4.0.5"
     steps:
-    - uses: actions/checkout@v4.1.1
+    - uses: actions/checkout@v6.0.3
     - name: Setup Ruby
-      uses: ruby/setup-ruby@v1
+      uses: ruby/setup-ruby@v1.99.0
       with:
         ruby-version: ${{ matrix.ruby_version }}
         bundler-cache: true
@@ -31,7 +31,7 @@ jobs:
         RAISE_ON_WARNING: 1
         RUBY_VERSION: ${{ matrix.ruby_version }}
     - name: Upload coverage results
-      uses: actions/upload-artifact@v4.4.0
+      uses: actions/upload-artifact@v7.0.1
       if: always()
       with:
         name: simplecov-resultset-ruby${{matrix.ruby_version}}
@@ -41,14 +41,14 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4.1.1
+    - uses: actions/checkout@v6.0.3
     - name: Setup Ruby
-      uses: ruby/setup-ruby@v1
+      uses: ruby/setup-ruby@v1.99.0
       with:
-        ruby-version: 3.4
+        ruby-version: "4.0.5"
         bundler-cache: true
     - name: Download coverage results
-      uses: actions/download-artifact@v4.2.1
+      uses: actions/download-artifact@v8.0.1
     - name: Collate simplecov
       run: |
         bundle exec rake coverage:report
