@@ -1,162 +1,136 @@
 #!/usr/bin/env bash
 
-fetch() {
-  git fetch --all
-}
+set -euo pipefail
 
 branch_name() {
   git symbolic-ref --short HEAD
 }
 
-local_history_is_clean() {
-  history=$(git rev-list --count --right-only @{u}...HEAD)
-  [ "$history" == "0" ]
-}
-
-remote_history_is_clean() {
-  history=$(git rev-list --count --left-only @{u}...HEAD)
-  [ "$history" == "0" ]
-}
-
-tag_exists_on_remote() {
-  git rev-parse --quiet --verify refs/tags/$1.$2.$3 > /dev/null
+current_version() {
+  ruby ./lib/jmeter-ruby/version.rb
 }
 
 working_tree_is_clean() {
-  status=$(git status --porcelain)
-  [ "$status" == "" ]
+  [ -z "$(git status --porcelain)" ]
 }
 
-create_release_branch() {
-  git switch -c release-$1-$2-$3
+local_history_is_clean() {
+  [ "$(git rev-list --count --right-only @{u}...HEAD)" = "0" ]
 }
 
-update_readme() {
-  sed -i '' "/## main/ {a\
-  \\
-\\
-## $1.$2.$3
-  }" docs/CHANGELOG.md
+remote_history_is_clean() {
+  [ "$(git rev-list --count --left-only @{u}...HEAD)" = "0" ]
 }
 
-update_ruby_version() {
-  # Update version file
-  sed -E -i '' \
-      -e "s/MAJOR = [0-9]+/MAJOR = $1/g" \
-      -e "s/MINOR = [0-9]+/MINOR = $2/g" \
-      -e "s/PATCH = [0-9]+/PATCH = $3/g" \
-      lib/jmeter-ruby/version.rb
+tag_exists() {
+  local version="$1"
 
-  # Update deprecation horizon version
-  major=$1
-  sed -E -i '' \
-      -e "s/DEPRECATION_HORIZON = [0-9]+/DEPRECATION_HORIZON = $((major + 1))/g" \
-      lib/jmeter-ruby/deprecation.rb
+  git rev-parse --quiet --verify "refs/tags/v${version}" > /dev/null ||
+    git ls-remote --exit-code --tags origin "refs/tags/v${version}" > /dev/null
 }
 
-update_gemfiles() {
-  # Update Gemfile.lock
-  bundle
+github_release_exists() {
+  local version="$1"
+
+  gh release view "v${version}" > /dev/null 2>&1
 }
 
-add_changed_files() {
-  git add \
-    Gemfile.lock \
-    lib/jmeter-ruby/version.rb
+require_github_cli() {
+  if ! command -v gh > /dev/null; then
+    echo "Error: GitHub CLI is required to create the GitHub release."
+    echo "Install it from https://cli.github.com/ and run gh auth login."
+    exit 1
+  fi
+
+  if ! gh auth status -h github.com > /dev/null 2>&1; then
+    echo "Error: GitHub CLI is not authenticated."
+    echo "Run gh auth login before releasing."
+    exit 1
+  fi
 }
 
-commit() {
-  git commit -m "release $1.$2.$3"
+write_release_notes() {
+  local version="$1"
+  local notes_file="$2"
+
+  awk -v heading="## v${version}" '
+    $0 == heading { in_section = 1; next }
+    in_section && /^## / { exit }
+    in_section { print }
+  ' CHANGES.md > "$notes_file"
+
+  if [ ! -s "$notes_file" ]; then
+    echo "Error: no release notes found for v${version} in CHANGES.md."
+    exit 1
+  fi
 }
 
-push() {
-  git push origin release-$1-$2-$3
+create_github_release() {
+  local version="$1"
+  local notes_file
 
-  echo "####################################################"
-  echo "Now, open a PR with this branch and merge it to main"
-  echo "Then, run script/publish on main to release the gem"
-  echo "Finally, create a GitHub release https://github.com/reeganviljoen/jmeter-ruby/releases/new with the changes from docs/CHANGELOG"
-  echo "####################################################"
+  notes_file="$(mktemp)"
+  trap 'rm -f "$notes_file"' EXIT
+
+  write_release_notes "$version" "$notes_file"
+  gh release create "v${version}" \
+    --title "v${version}" \
+    --notes-file "$notes_file"
 }
 
 main() {
-  version=$(ruby ./lib/jmeter-ruby/version.rb)
-  version=(${version//./ })
-  major=${version[0]}
-  minor=${version[1]}
-  patch=${version[2]}
+  local version
+  version="$(current_version)"
 
-  echo "==================="
-  echo "Prerequisite Checks"
-  echo "==================="
-
-  if ! working_tree_is_clean; then
-    echo "Error: unclean working tree"
-    exit 1
-  fi
+  echo "Preparing to release jmeter-ruby ${version}"
 
   if [ "$(branch_name)" != "main" ]; then
-    echo "Error: can only make a release on the main branch"
+    echo "Error: releases must be run from main after the release PR is merged."
     exit 1
   fi
 
-  fetch
+  if ! working_tree_is_clean; then
+    echo "Error: working tree is not clean."
+    exit 1
+  fi
+
+  git fetch --all --tags
 
   if ! remote_history_is_clean; then
-    echo "Error: changes exist on origin not pulled into this branch. Please pull"
+    echo "Error: origin/main has changes that are not pulled locally."
     exit 1
   fi
 
   if ! local_history_is_clean; then
-    echo "Error: changes exist that haven't been pushed to origin. Please pull"
+    echo "Error: local main has commits that are not pushed to origin."
     exit 1
   fi
 
-  echo "Type the number of an option to bump, or pick Manual to enter a version number"
-  select bump in Major Minor Patch Manual
-  do
-    if [ "$bump" == "Major" ]; then
-      major=$((major + 1))
-      minor=0
-      patch=0
-    elif [ "$bump" == "Minor" ]; then
-      minor=$((minor + 1))
-      patch=0
-    elif [ "$bump" == "Patch" ]; then
-      patch=$((patch + 1))
-    else
-      read -p "What version? (Currently $major.$minor.$patch): " new_version
-      if [ "$new_version" == "$major.$minor.$patch" ]; then
-        echo "Error: Can't be the same version"
-        exit 1
-      fi
+  if tag_exists "$version"; then
+    echo "Error: tag v${version} already exists."
+    exit 1
+  fi
 
-      new_version=(${new_version//./ })
+  require_github_cli
 
-      major=${new_version[0]}
-      minor=${new_version[1]}
-      patch=${new_version[2]}
-    fi
+  if github_release_exists "$version"; then
+    echo "Error: GitHub release v${version} already exists."
+    exit 1
+  fi
 
-    if tag_exists_on_remote $major $minor $patch; then
-      echo "Error: tag exists on remote"
-      exit 1
-    fi
+  bundle install
+  bundle exec rake spec
+  bundle exec rake build
 
-    echo "==============================="
-    echo "Creating release for $major.$minor.$patch"
-    echo "==============================="
-
-    create_release_branch $major $minor $patch
-    update_readme $major $minor $patch
-    update_ruby_version $major $minor $patch
-    update_gemfiles $major $minor $patch
-    echo "version: $major.$minor.$patch" > docs/_data/library.yml
-    add_changed_files $major $minor $patch
-    commit $major $minor $patch
-    push $major $minor $patch
+  if [ "${DRY_RUN:-}" = "1" ]; then
+    echo "Dry run complete. Skipping: bundle exec rake release and gh release create"
     exit 0
-  done
+  fi
+
+  bundle exec rake release
+  create_github_release "$version"
+
+  echo "Released jmeter-ruby ${version}."
 }
 
 main

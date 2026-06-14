@@ -414,6 +414,25 @@ If contributing please add an appropriate test. See `spec/*_spec.rb` for example
 
     $ bundle exec rspec
 
+### Release
+
+Releases use Bundler's gem release task. Prepare the version bump and `CHANGES.md` entry in a pull request first. After that PR is merged, release from an up-to-date `main` branch:
+
+```sh
+git switch main
+git pull origin main
+gem signin
+script/release
+```
+
+The release script verifies that `main` is clean and synced, runs `bundle install`, runs the specs, builds the gem, and then delegates publishing to `bundle exec rake release`. That Bundler task creates and pushes the `vX.Y.Z` git tag and pushes the gem to RubyGems.org. After that, the script creates the GitHub release for the same tag using the matching `CHANGES.md` section.
+
+To check the release flow without publishing:
+
+```sh
+DRY_RUN=1 script/release
+```
+
 ### Examples
 
 It is often useful to add an appropriate example for other users and for testing your changes locally with the JMeter UI. See `examples` for different types of examples. To let your examples work locally from your own changes / commits simply prefix the examples with:
