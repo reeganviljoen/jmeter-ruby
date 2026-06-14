@@ -10,6 +10,56 @@ current_version() {
   ruby ./lib/jmeter-ruby/version.rb
 }
 
+required_ruby_version() {
+  ruby -e 'spec = Gem::Specification.load("jmeter-ruby.gemspec"); puts spec.required_ruby_version.requirements.first.last'
+}
+
+current_ruby_version() {
+  ruby -e 'puts RUBY_VERSION'
+}
+
+require_supported_ruby() {
+  local required_version
+  local active_version
+
+  required_version="$(required_ruby_version)"
+  active_version="$(current_ruby_version)"
+
+  if ruby -e "exit(Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('$required_version'))"; then
+    return
+  fi
+
+  echo "Error: Ruby ${required_version} or newer is required, but active ruby is ${active_version}."
+  echo "Active ruby: $(command -v ruby)"
+  echo "Install/activate the project Ruby first, for example:"
+  echo "  mise trust && mise install"
+  echo "  mise exec -- script/release"
+  exit 1
+}
+
+require_bundler() {
+  if command -v bundle > /dev/null && bundle -v > /dev/null 2>&1; then
+    return
+  fi
+
+  echo "Error: Bundler is not available for the active Ruby."
+  echo "Active ruby: $(command -v ruby)"
+  if [ -f Gemfile.lock ]; then
+    local bundled_version
+    bundled_version="$(awk '/^BUNDLED WITH$/ { getline; gsub(/^[[:space:]]+/, ""); print; exit }' Gemfile.lock)"
+
+    if [ -n "$bundled_version" ]; then
+      echo "Install the locked Bundler for this Ruby with:"
+      echo "  gem install bundler:${bundled_version}"
+      exit 1
+    fi
+  fi
+
+  echo "Install Bundler for this Ruby with:"
+  echo "  gem install bundler"
+  exit 1
+}
+
 working_tree_is_clean() {
   [ -z "$(git status --porcelain)" ]
 }
@@ -108,6 +158,10 @@ release_tag_and_gem() {
 
 main() {
   local version
+
+  require_supported_ruby
+  require_bundler
+
   version="$(current_version)"
 
   echo "Preparing to release jmeter-ruby ${version}"
