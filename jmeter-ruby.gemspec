@@ -8,10 +8,10 @@ Gem::Specification.new do |gem|
   gem.version       = JmeterRuby::VERSION::STRING
   gem.authors       = ['Reegan Viljoen']
   gem.email         = ['reeganviljoen@outlook.com']
-  gem.description   = %q{Ruby based DSL for writing JMeter test plans}
-  gem.summary       = %q{Ruby based DSL for writing JMeter test plans}
-  gem.homepage      = 'https://github.com/reeganviljoen/jmeter-ruby/issues'
-  gem.required_ruby_version = ">= 3.1.0"
+  gem.summary       = 'Ruby DSL for writing JMeter test plans'
+  gem.description   = 'JMeter-Ruby provides a Ruby DSL for generating Apache JMeter test plans.'
+  gem.homepage      = 'https://github.com/reeganviljoen/jmeter-ruby'
+  gem.required_ruby_version = ">= 3.3.0"
 
   gem.add_dependency 'rest-client'
   gem.add_dependency 'nokogiri'
