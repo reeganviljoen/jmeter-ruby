@@ -18,7 +18,7 @@ jobs:
           - ruby_version: "3.4"
           - ruby_version: "4.0.5"
     steps:
-    - uses: actions/checkout@v6.0.3
+    - uses: actions/checkout@v7.0.0
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1.313.0
       with:
@@ -41,7 +41,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6.0.3
+    - uses: actions/checkout@v7.0.0
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1.313.0
       with:
